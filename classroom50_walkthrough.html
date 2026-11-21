@@ -5,81 +5,293 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Ain Shams University · Classroom 50 Interactive Student Walkthrough</title>
   <link rel="icon" href="ar_logo.png" type="image/png" />
-  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
   <style>
     :root {
-      --background: #0b0e1d;
+      --bg: #0b0e1d;
       --card: #161c34;
-      --card-border: #34416e;
-      --sidebar: #0a0d18;
-      --foreground: #edf2fc;
-      --muted-foreground: #9eaac9;
-      --code-foreground: #38d9f5;
-      --primary: #38d9f5;
-      --primary-foreground: #0a0d18;
-      --success: #34d399;
-      --warning: #fbbf24;
-      --error: #f87171;
+      --border: #34416e;
+      --panel: #0a0d18;
+      --text: #edf2fc;
+      --muted: #9eaac9;
+      --cyan: #38d9f5;
+      --purple: #b07cff;
+      --green: #34d399;
+      --amber: #fbbf24;
+      --red: #f87171;
     }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
-      background-color: var(--background);
-      color: var(--foreground);
+      background-color: var(--bg);
+      color: var(--text);
+      padding: 14px;
+      user-select: none;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    .top-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .btn-play {
+      background: var(--cyan);
+      color: #0a0d18;
+      border: none;
+      border-radius: 6px;
+      padding: 5px 12px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .btn-play:hover { opacity: 0.9; }
+    .step-badge {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .tabs {
+      display: flex;
+      gap: 5px;
+    }
+    .tab-btn {
+      background: var(--panel);
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .tab-btn.active {
+      background: var(--cyan);
+      color: #0a0d18;
+      border-color: var(--cyan);
+      font-weight: 700;
+    }
+    .stage-grid {
+      display: grid;
+      grid-template-columns: 5fr 7fr;
+      gap: 12px;
+    }
+    @media (max-width: 680px) {
+      .stage-grid { grid-template-columns: 1fr; }
+    }
+    .panel-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .kicker {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--cyan);
+      margin-bottom: 4px;
+    }
+    .title {
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 6px;
+    }
+    .desc {
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .action-box {
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .action-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .action-label {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--muted);
+    }
+    .btn-copy {
+      background: var(--panel);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      padding: 2px 9px;
+      font-size: 11.5px;
+      cursor: pointer;
+    }
+    .btn-copy:hover { border-color: var(--cyan); }
+    .action-val {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 11.5px;
+      background: var(--panel);
+      color: var(--cyan);
+      padding: 8px;
+      border-radius: 6px;
+      word-break: break-all;
+      border: 1px solid rgba(52, 65, 110, 0.5);
+    }
+    .win-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 8px;
+      margin-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .win-dots {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+    .dot.r { background: var(--red); }
+    .dot.y { background: var(--amber); }
+    .dot.g { background: var(--green); }
+    .win-title {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 12px;
+      color: var(--muted);
+      margin-left: 6px;
+    }
+    .win-status {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 12px;
+      color: var(--green);
+      font-weight: 600;
+    }
+    .visual-stage {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-height: 195px;
+      justify-content: center;
+    }
+    .sub-box {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px;
+      line-height: 1.55;
+    }
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+    .warn-box {
+      border: 1px solid var(--amber);
+      background: rgba(251, 191, 36, 0.08);
+      color: var(--amber);
+      border-radius: 8px;
+      padding: 8px 10px;
+      line-height: 1.45;
+    }
+    .err-box {
+      border: 1px solid var(--red);
+      background: rgba(248, 113, 113, 0.1);
+      color: var(--red);
+      border-radius: 8px;
+      padding: 8px 10px;
+      line-height: 1.45;
+    }
+    .pill-ok {
+      display: inline-block;
+      margin-top: 6px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: var(--green);
+      color: #0a0d18;
+      font-weight: 700;
+    }
+    .c-cyan { color: var(--cyan); }
+    .c-green { color: var(--green); }
+    .c-muted { color: var(--muted); }
+    .progress-track {
+      width: 100%;
+      height: 6px;
+      border-radius: 99px;
+      background: var(--panel);
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--cyan);
+      transition: width 0.3s ease;
     }
   </style>
 </head>
-<body class="bg-[var(--background)] text-[var(--foreground)] antialiased p-4 m-0">
-  <div class="max-w-4xl mx-auto py-2 space-y-2.5 select-none">
-    <!-- Top Control Bar -->
-    <div class="flex items-center justify-between gap-2 pb-2 border-b border-[var(--card-border)] flex-wrap">
-      <div class="flex items-center gap-2">
-        <button id="playBtn" onclick="togglePlay()" class="px-2.5 py-1 rounded text-xs font-semibold bg-[var(--primary)] text-[var(--primary-foreground)] hover:opacity-90 transition cursor-pointer">
-          ⏸ Pause Tour
-        </button>
-        <span id="stepBadge" class="text-xs font-mono text-[var(--muted-foreground)]">Step 1 / 6</span>
+<body>
+  <div class="container">
+    <div class="top-bar">
+      <div class="top-left">
+        <button id="playBtn" class="btn-play" onclick="togglePlay()">⏸ Pause Tour</button>
+        <span id="stepBadge" class="step-badge">Step 1 / 6</span>
       </div>
-      <div class="flex items-center gap-1" id="tabs"></div>
+      <div class="tabs" id="tabs"></div>
     </div>
 
-    <!-- Main Split Stage -->
-    <div class="grid grid-cols-1 md:grid-cols-12 gap-2.5 items-stretch">
-      <!-- Left: Step Explanation & Exact Link/Command -->
-      <div class="md:col-span-5 bg-[var(--card)] border border-[var(--card-border)] rounded-lg p-3 flex flex-col justify-between space-y-2">
-        <div class="space-y-1.5">
-          <div class="text-xs font-semibold uppercase tracking-wider text-[var(--primary)]" id="stageKicker"></div>
-          <h3 class="text-sm font-bold leading-snug text-[var(--foreground)]" id="stageTitle"></h3>
-          <p class="text-xs text-[var(--muted-foreground)] leading-relaxed" id="stageDesc"></p>
+    <div class="stage-grid">
+      <div class="panel-card">
+        <div>
+          <div class="kicker" id="stageKicker"></div>
+          <h3 class="title" id="stageTitle"></h3>
+          <p class="desc" id="stageDesc"></p>
         </div>
-
-        <div class="space-y-1.5 pt-1 border-t border-[var(--card-border)]">
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-semibold text-[var(--muted-foreground)]" id="actionLabel">Official Link</span>
-            <button onclick="copyCurrent()" id="copyBtn" class="text-xs px-2 py-0.5 rounded border border-[var(--card-border)] hover:bg-[var(--sidebar)] text-[var(--foreground)] transition cursor-pointer">
-              Copy
-            </button>
+        <div class="action-box">
+          <div class="action-head">
+            <span class="action-label" id="actionLabel">Official Link</span>
+            <button class="btn-copy" id="copyBtn" onclick="copyCurrent()">Copy</button>
           </div>
-          <div class="font-mono text-xs p-1.5 rounded bg-[var(--sidebar)] text-[var(--code-foreground)] break-all" id="actionValue"></div>
+          <div class="action-val" id="actionValue"></div>
         </div>
       </div>
 
-      <!-- Right: Simulated Visual / Terminal Preview -->
-      <div class="md:col-span-7 bg-[var(--card)] border border-[var(--card-border)] rounded-lg p-3 flex flex-col justify-between">
-        <div class="flex items-center justify-between pb-1.5 mb-1.5 border-b border-[var(--card-border)]">
-          <div class="flex items-center gap-1.5">
-            <span class="w-2.5 h-2.5 rounded-full bg-[var(--error)] inline-block"></span>
-            <span class="w-2.5 h-2.5 rounded-full bg-[var(--warning)] inline-block"></span>
-            <span class="w-2.5 h-2.5 rounded-full bg-[var(--success)] inline-block"></span>
-            <span class="ml-1.5 text-xs font-mono text-[var(--muted-foreground)]" id="windowHeader"></span>
+      <div class="panel-card">
+        <div class="win-top">
+          <div class="win-dots">
+            <span class="dot r"></span>
+            <span class="dot y"></span>
+            <span class="dot g"></span>
+            <span class="win-title" id="windowHeader"></span>
           </div>
-          <span class="text-xs font-mono text-[var(--success)]" id="windowStatus"></span>
+          <span class="win-status" id="windowStatus"></span>
         </div>
-        <div id="visualStage" class="font-mono text-xs space-y-1.5 min-h-[190px] flex flex-col justify-center"></div>
+        <div class="visual-stage" id="visualStage"></div>
       </div>
     </div>
 
-    <!-- Bottom Progress Bar -->
-    <div class="w-full h-1.5 rounded-full bg-[var(--sidebar)] overflow-hidden">
-      <div id="progressBar" class="h-full bg-[var(--primary)] transition-all duration-300" style="width: 16.6%"></div>
+    <div class="progress-track">
+      <div id="progressBar" class="progress-fill" style="width: 16.6%"></div>
     </div>
   </div>
 
@@ -94,23 +306,14 @@
         winHeader: "mechatronicsdept.github.io",
         winStatus: "● Fall 2026 Live",
         render: () => `
-          <div class="p-2 rounded bg-[var(--sidebar)] border border-[var(--card-border)] space-y-1">
-            <div class="font-bold text-[var(--foreground)]">Ain Shams University · Faculty of Engineering</div>
-            <div class="text-[var(--muted-foreground)]">Classroom: <span class="text-[var(--primary)]">fall26-fop</span> (Fundamentals of Computer Programming)</div>
+          <div class="sub-box">
+            <div><b>Ain Shams University · Faculty of Engineering</b></div>
+            <div class="c-muted">Classroom: <span class="c-cyan">fall26-fop</span> (Fundamentals of Computer Programming)</div>
           </div>
-          <div class="grid grid-cols-3 gap-1.5 pt-1">
-            <div class="p-2 rounded bg-[var(--sidebar)] border border-[var(--card-border)]">
-              <div class="font-bold text-[var(--primary)]">1. Join Org</div>
-              <div class="text-[var(--muted-foreground)]">Accept invite to MechatronicsDept</div>
-            </div>
-            <div class="p-2 rounded bg-[var(--sidebar)] border border-[var(--card-border)]">
-              <div class="font-bold text-[var(--primary)]">2. Accept</div>
-              <div class="text-[var(--muted-foreground)]">Get your private C++ repo</div>
-            </div>
-            <div class="p-2 rounded bg-[var(--sidebar)] border border-[var(--card-border)]">
-              <div class="font-bold text-[var(--success)]">3. Push</div>
-              <div class="text-[var(--muted-foreground)]">Auto-graded on every push</div>
-            </div>
+          <div class="mini-grid">
+            <div class="sub-box"><div class="c-cyan"><b>1. Join Org</b></div><div class="c-muted">Accept invite to MechatronicsDept</div></div>
+            <div class="sub-box"><div class="c-cyan"><b>2. Accept</b></div><div class="c-muted">Get your private C++ repo</div></div>
+            <div class="sub-box"><div class="c-green"><b>3. Push</b></div><div class="c-muted">Auto-graded on every push</div></div>
           </div>
         `
       },
@@ -123,12 +326,12 @@
         winHeader: "github.com/MechatronicsDept",
         winStatus: "✓ Team: classroom50-fall26-fop",
         render: () => `
-          <div class="p-2.5 rounded bg-[var(--sidebar)] border border-[var(--card-border)] space-y-1.5">
-            <div class="font-bold text-[var(--foreground)]">📨 You've been invited to join MechatronicsDept</div>
-            <div class="text-[var(--muted-foreground)]">Invited by course staff · Adds you to team <span class="text-[var(--primary)]">classroom50-fall26-fop</span></div>
-            <div class="inline-block px-2.5 py-1 rounded bg-[var(--success)] text-black font-bold">✓ Accept Invitation</div>
+          <div class="sub-box">
+            <div><b>📨 You've been invited to join MechatronicsDept</b></div>
+            <div class="c-muted">Invited by course staff · Adds you to team <span class="c-cyan">classroom50-fall26-fop</span></div>
+            <div class="pill-ok">✓ Accept Invitation</div>
           </div>
-          <div class="p-2 rounded border border-[var(--warning)] text-[var(--warning)]">
+          <div class="warn-box">
             ⚠ If skipped, assignment links say: "This assignment isn't available to you."
           </div>
         `
@@ -142,14 +345,14 @@
         winHeader: "classroom50.org · Accept Assignment",
         winStatus: "✓ Repo Created",
         render: () => `
-          <div class="space-y-1 p-2 rounded bg-[var(--sidebar)] border border-[var(--card-border)]">
-            <div class="text-[var(--success)]">✓ Created private repo: <b>MechatronicsDept/fall26-fop-hello-student</b></div>
-            <div class="text-[var(--success)]">✓ Copied starter code: <b>README.md</b>, <b>hello.cpp</b></div>
-            <div class="text-[var(--success)]">✓ Committed <b>.classroom50.yaml</b> &amp; <b>.github/workflows/autograde.yaml</b></div>
-            <div class="text-[var(--success)]">✓ Opened <b>Feedback Pull Request #1</b> (main &rarr; feedback)</div>
+          <div class="sub-box">
+            <div class="c-green">✓ Created private repo: <b>MechatronicsDept/fall26-fop-hello-student</b></div>
+            <div class="c-green">✓ Copied starter code: <b>README.md</b>, <b>hello.cpp</b></div>
+            <div class="c-green">✓ Committed <b>.classroom50.yaml</b> &amp; <b>.github/workflows/autograde.yaml</b></div>
+            <div class="c-green">✓ Opened <b>Feedback Pull Request #1</b> (main &rarr; feedback)</div>
           </div>
-          <div class="text-[var(--muted-foreground)] pt-0.5">
-            CLI option: <span class="text-[var(--code-foreground)]">gh student accept MechatronicsDept fall26-fop hello --key fall26fop</span>
+          <div class="c-muted">
+            CLI option: <span class="c-cyan">gh student accept MechatronicsDept fall26-fop hello --key fall26fop</span>
           </div>
         `
       },
@@ -162,14 +365,14 @@
         winHeader: "bash — fall26-fop-hello-student",
         winStatus: "● Pushed to main",
         render: () => `
-          <div class="p-2 rounded bg-[var(--sidebar)] border border-[var(--card-border)] space-y-0.5">
-            <div class="text-[var(--primary)]">$ g++ -o hello hello.cpp &amp;&amp; ./hello</div>
-            <div class="text-[var(--success)]">Hello, world!</div>
-            <div class="text-[var(--primary)]">$ git add hello.cpp &amp;&amp; git commit -m "Implement Hello, world!"</div>
-            <div class="text-[var(--primary)]">$ git push</div>
-            <div class="text-[var(--muted-foreground)]">main -> main (Triggered Classroom50 Autograde Runner)</div>
+          <div class="sub-box">
+            <div class="c-cyan">$ g++ -o hello hello.cpp &amp;&amp; ./hello</div>
+            <div class="c-green">Hello, world!</div>
+            <div class="c-cyan">$ git add hello.cpp &amp;&amp; git commit -m "Implement Hello, world!"</div>
+            <div class="c-cyan">$ git push</div>
+            <div class="c-muted">main -&gt; main (Triggered Classroom50 Autograde Runner)</div>
           </div>
-          <div class="p-1.5 rounded border border-[var(--error)] text-[var(--error)]">
+          <div class="err-box">
             ✗ Do NOT edit/delete <b>.classroom50.yaml</b> or <b>.github/workflows/autograde.yaml</b>!
           </div>
         `
@@ -183,16 +386,13 @@
         winHeader: "GitHub Releases & Pull Request #1",
         winStatus: "★ Score: 3 / 3",
         render: () => `
-          <div class="p-2 rounded bg-[var(--sidebar)] border border-[var(--card-border)] space-y-1">
-            <div class="font-bold text-[var(--success)]">Release: Submission submit/2026-11-20T... · Score: 3 / 3</div>
-            <div class="grid grid-cols-3 border-t border-[var(--card-border)] pt-1">
-              <span>compiles (g++)</span><span class="text-[var(--success)] font-bold">PASS</span><span>1 / 1</span>
-              <span>prints hello</span><span class="text-[var(--success)] font-bold">PASS</span><span>2 / 2</span>
-            </div>
+          <div class="sub-box">
+            <div class="c-green"><b>Release: Submission submit/2026-11-20T... · Score: 3 / 3</b></div>
+            <div class="c-muted" style="margin-top:4px;">compiles (g++): <b class="c-green">PASS (1/1)</b> &nbsp;|&nbsp; prints hello: <b class="c-green">PASS (2/2)</b></div>
           </div>
-          <div class="p-2 rounded bg-[var(--sidebar)] border border-[var(--card-border)]">
-            <div class="font-bold text-[var(--primary)]">Pull Request #1: Feedback (base: feedback &larr; head: main)</div>
-            <div class="text-[var(--muted-foreground)]">Click <b>Subscribe</b> for TA comments. Never close or merge this PR yourself!</div>
+          <div class="sub-box">
+            <div class="c-cyan"><b>Pull Request #1: Feedback (base: feedback &larr; head: main)</b></div>
+            <div class="c-muted">Click <b>Subscribe</b> for TA comments. Never close or merge this PR yourself!</div>
           </div>
         `
       },
@@ -205,11 +405,11 @@
         winHeader: "Golden Rules Checklist",
         winStatus: "✓ Ready to Code",
         render: () => `
-          <div class="space-y-1 p-2 rounded bg-[var(--sidebar)] border border-[var(--card-border)]">
-            <div><span class="text-[var(--success)] font-bold">1.</span> Never modify <b>.classroom50.yaml</b> or <b>.github/workflows/autograde.yaml</b>.</div>
-            <div><span class="text-[var(--success)] font-bold">2.</span> Only edit allowed files (<b>hello.cpp</b>); extra files are stripped at grade time.</div>
-            <div><span class="text-[var(--success)] font-bold">3.</span> Clone your personal <b>fall26-fop-hello-&lt;username&gt;</b> repo, never the <b>-template</b> repo.</div>
-            <div><span class="text-[var(--success)] font-bold">4.</span> Keep the <b>Feedback</b> Pull Request open; if setup breaks, click <b>Re-run setup</b> on the accept link.</div>
+          <div class="sub-box">
+            <div><b class="c-green">1.</b> Never modify <b>.classroom50.yaml</b> or <b>.github/workflows/autograde.yaml</b>.</div>
+            <div><b class="c-green">2.</b> Only edit allowed files (<b>hello.cpp</b>); extra files are stripped at grade time.</div>
+            <div><b class="c-green">3.</b> Clone your personal <b>fall26-fop-hello-&lt;username&gt;</b> repo, never the <b>-template</b> repo.</div>
+            <div><b class="c-green">4.</b> Keep the <b>Feedback</b> Pull Request open; if setup breaks, click <b>Re-run setup</b> on the accept link.</div>
           </div>
         `
       }
@@ -222,11 +422,7 @@
     function renderTabs() {
       const wrap = document.getElementById("tabs");
       wrap.innerHTML = STEPS.map((_, idx) => `
-        <button onclick="goToStep(${idx})" class="px-2 py-0.5 rounded text-xs font-mono transition cursor-pointer ${
-          idx === current
-            ? "bg-[var(--primary)] text-[var(--primary-foreground)] font-bold"
-            : "bg-[var(--sidebar)] text-[var(--muted-foreground)] hover:text-[var(--foreground)]"
-        }">${idx + 1}</button>
+        <button onclick="goToStep(${idx})" class="tab-btn ${idx === current ? "active" : ""}">${idx + 1}</button>
       `).join("");
     }
 
