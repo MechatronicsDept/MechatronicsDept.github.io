@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ain Shams University · Classroom 50 Interactive Student Walkthrough</title>
+  <link rel="icon" href="ar_logo.png" type="image/png" />
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    :root {
+      --background: #0b0e1d;
+      --card: #161c34;
+      --card-border: #34416e;
+      --sidebar: #0a0d18;
+      --foreground: #edf2fc;
+      --muted-foreground: #9eaac9;
+      --code-foreground: #38d9f5;
+      --primary: #38d9f5;
+      --primary-foreground: #0a0d18;
+      --success: #34d399;
+      --warning: #fbbf24;
+      --error: #f87171;
+    }
+    body {
+      font-family: "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+      background-color: var(--background);
+      color: var(--foreground);
+    }
+  </style>
+</head>
+<body class="bg-[var(--background)] text-[var(--foreground)] antialiased p-4 m-0">
+  <div class="max-w-4xl mx-auto py-2 space-y-2.5 select-none">
+    <!-- Top Control Bar -->
+    <div class="flex items-center justify-between gap-2 pb-2 border-b border-[var(--card-border)] flex-wrap">
+      <div class="flex items-center gap-2">
+        <button id="playBtn" onclick="togglePlay()" class="px-2.5 py-1 rounded text-xs font-semibold bg-[var(--primary)] text-[var(--primary-foreground)] hover:opacity-90 transition cursor-pointer">
+          ⏸ Pause Tour
+        </button>
+        <span id="stepBadge" class="text-xs font-mono text-[var(--muted-foreground)]">Step 1 / 6</span>
+      </div>
+      <div class="flex items-center gap-1" id="tabs"></div>
+    </div>
+
+    <!-- Main Split Stage -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-2.5 items-stretch">
+      <!-- Left: Step Explanation & Exact Link/Command -->
+      <div class="md:col-span-5 bg-[var(--card)] border border-[var(--card-border)] rounded-lg p-3 flex flex-col justify-between space-y-2">
+        <div class="space-y-1.5">
+          <div class="text-xs font-semibold uppercase tracking-wider text-[var(--primary)]" id="stageKicker"></div>
+          <h3 class="text-sm font-bold leading-snug text-[var(--foreground)]" id="stageTitle"></h3>
+          <p class="text-xs text-[var(--muted-foreground)] leading-relaxed" id="stageDesc"></p>
+        </div>
+
+        <div class="space-y-1.5 pt-1 border-t border-[var(--card-border)]">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold text-[var(--muted-foreground)]" id="actionLabel">Official Link</span>
+            <button onclick="copyCurrent()" id="copyBtn" class="text-xs px-2 py-0.5 rounded border border-[var(--card-border)] hover:bg-[var(--sidebar)] text-[var(--foreground)] transition cursor-pointer">
+              Copy
+            </button>
+          </div>
+          <div class="font-mono text-xs p-1.5 rounded bg-[var(--sidebar)] text-[var(--code-foreground)] break-all" id="actionValue"></div>
+        </div>
+      </div>
+
+      <!-- Right: Simulated Visual / Terminal Preview -->
+      <div class="md:col-span-7 bg-[var(--card)] border border-[var(--card-border)] rounded-lg p-3 flex flex-col justify-between">
+        <div class="flex items-center justify-between pb-1.5 mb-1.5 border-b border-[var(--card-border)]">
+          <div class="flex items-center gap-1.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-[var(--error)] inline-block"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-[var(--warning)] inline-block"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-[var(--success)] inline-block"></span>
+            <span class="ml-1.5 text-xs font-mono text-[var(--muted-foreground)]" id="windowHeader"></span>
+          </div>
+          <span class="text-xs font-mono text-[var(--success)]" id="windowStatus"></span>
+        </div>
+        <div id="visualStage" class="font-mono text-xs space-y-1.5 min-h-[190px] flex flex-col justify-center"></div>
+      </div>
+    </div>
+
+    <!-- Bottom Progress Bar -->
+    <div class="w-full h-1.5 rounded-full bg-[var(--sidebar)] overflow-hidden">
+      <div id="progressBar" class="h-full bg-[var(--primary)] transition-all duration-300" style="width: 16.6%"></div>
+    </div>
+  </div>
+
+  <script>
+    const STEPS = [
+      {
+        kicker: "Overview · Ain Shams Engineering",
+        title: "Welcome to Fundamentals of Computer Programming",
+        desc: "Our course uses Classroom 50 (classroom50.org) on GitHub. Your starter code, automated C++ tests, scores, and TA feedback all live inside your GitHub repository.",
+        actionLabel: "Course Landing Page",
+        actionValue: "https://mechatronicsdept.github.io/",
+        winHeader: "mechatronicsdept.github.io",
+        winStatus: "● Fall 2026 Live",
+        render: () => `
+          <div class="p-2 rounded bg-[var(--sidebar)] border border-[var(--card-border)] space-y-1">
+            <div class="font-bold text-[var(--foreground)]">Ain Shams University · Faculty of Engineering</div>
+            <div class="text-[var(--muted-foreground)]">Classroom: <span class="text-[var(--primary)]">fall26-fop</span> (Fundamentals of Computer Programming)</div>
+          </div>
+          <div class="grid grid-cols-3 gap-1.5 pt-1">
+            <div class="p-2 rounded bg-[var(--sidebar)] border border-[var(--card-border)]">
+              <div class="font-bold text-[var(--primary)]">1. Join Org</div>
+              <div class="text-[var(--muted-foreground)]">Accept invite to MechatronicsDept</div>
+            </div>
+            <div class="p-2 rounded bg-[var(--sidebar)] border border-[var(--card-border)]">
+              <div class="font-bold text-[var(--primary)]">2. Accept</div>
+              <div class="text-[var(--muted-foreground)]">Get your private C++ repo</div>
+            </div>
+            <div class="p-2 rounded bg-[var(--sidebar)] border border-[var(--card-border)]">
+              <div class="font-bold text-[var(--success)]">3. Push</div>
+              <div class="text-[var(--muted-foreground)]">Auto-graded on every push</div>
+            </div>
+          </div>
+        `
+      },
+      {
+        kicker: "Step 1 · Required First Step",
+        title: "Accept the GitHub Organization Invitation",
+        desc: "Check your email or open github.com/MechatronicsDept and accept the invitation. This enrolls you in the classroom50-fall26-fop student team.",
+        actionLabel: "GitHub Organization URL",
+        actionValue: "https://github.com/MechatronicsDept",
+        winHeader: "github.com/MechatronicsDept",
+        winStatus: "✓ Team: classroom50-fall26-fop",
+        render: () => `
+          <div class="p-2.5 rounded bg-[var(--sidebar)] border border-[var(--card-border)] space-y-1.5">
+            <div class="font-bold text-[var(--foreground)]">📨 You've been invited to join MechatronicsDept</div>
+            <div class="text-[var(--muted-foreground)]">Invited by course staff · Adds you to team <span class="text-[var(--primary)]">classroom50-fall26-fop</span></div>
+            <div class="inline-block px-2.5 py-1 rounded bg-[var(--success)] text-black font-bold">✓ Accept Invitation</div>
+          </div>
+          <div class="p-2 rounded border border-[var(--warning)] text-[var(--warning)]">
+            ⚠ If skipped, assignment links say: "This assignment isn't available to you."
+          </div>
+        `
+      },
+      {
+        kicker: "Step 2 · Get Your Repository",
+        title: "Accept the 'Hello, World!' Assignment",
+        desc: "Open the assignment link on classroom50.org and click 'Accept assignment'. It clones fall26-fop-hello-template into your personal private repository.",
+        actionLabel: "Assignment 1 ('hello') Accept Link",
+        actionValue: "https://classroom50.org/MechatronicsDept/fall26-fop/assignments/hello/accept?k=fall26fop",
+        winHeader: "classroom50.org · Accept Assignment",
+        winStatus: "✓ Repo Created",
+        render: () => `
+          <div class="space-y-1 p-2 rounded bg-[var(--sidebar)] border border-[var(--card-border)]">
+            <div class="text-[var(--success)]">✓ Created private repo: <b>MechatronicsDept/fall26-fop-hello-student</b></div>
+            <div class="text-[var(--success)]">✓ Copied starter code: <b>README.md</b>, <b>hello.cpp</b></div>
+            <div class="text-[var(--success)]">✓ Committed <b>.classroom50.yaml</b> &amp; <b>.github/workflows/autograde.yaml</b></div>
+            <div class="text-[var(--success)]">✓ Opened <b>Feedback Pull Request #1</b> (main &rarr; feedback)</div>
+          </div>
+          <div class="text-[var(--muted-foreground)] pt-0.5">
+            CLI option: <span class="text-[var(--code-foreground)]">gh student accept MechatronicsDept fall26-fop hello --key fall26fop</span>
+          </div>
+        `
+      },
+      {
+        kicker: "Step 3 · Code, Compile & Submit",
+        title: "Edit hello.cpp, Test with g++, and Push",
+        desc: "Clone your personal repo, make hello.cpp print 'Hello, world!', test locally, then commit and push (or run 'gh student submit').",
+        actionLabel: "Terminal Commands",
+        actionValue: "g++ -o hello hello.cpp && ./hello && git add hello.cpp && git commit -m \"Solve hello\" && git push",
+        winHeader: "bash — fall26-fop-hello-student",
+        winStatus: "● Pushed to main",
+        render: () => `
+          <div class="p-2 rounded bg-[var(--sidebar)] border border-[var(--card-border)] space-y-0.5">
+            <div class="text-[var(--primary)]">$ g++ -o hello hello.cpp &amp;&amp; ./hello</div>
+            <div class="text-[var(--success)]">Hello, world!</div>
+            <div class="text-[var(--primary)]">$ git add hello.cpp &amp;&amp; git commit -m "Implement Hello, world!"</div>
+            <div class="text-[var(--primary)]">$ git push</div>
+            <div class="text-[var(--muted-foreground)]">main -> main (Triggered Classroom50 Autograde Runner)</div>
+          </div>
+          <div class="p-1.5 rounded border border-[var(--error)] text-[var(--error)]">
+            ✗ Do NOT edit/delete <b>.classroom50.yaml</b> or <b>.github/workflows/autograde.yaml</b>!
+          </div>
+        `
+      },
+      {
+        kicker: "Step 4 · Autograding & Code Review",
+        title: "Check Your Score in Releases & Feedback PR",
+        desc: "Every push creates a 'submit/*' GitHub Release with your test breakdown and updates Pull Request #1 ('Feedback') for inline teacher/TA comments.",
+        actionLabel: "Classroom Dashboard",
+        actionValue: "https://classroom50.org/MechatronicsDept/fall26-fop/assignments",
+        winHeader: "GitHub Releases & Pull Request #1",
+        winStatus: "★ Score: 3 / 3",
+        render: () => `
+          <div class="p-2 rounded bg-[var(--sidebar)] border border-[var(--card-border)] space-y-1">
+            <div class="font-bold text-[var(--success)]">Release: Submission submit/2026-11-20T... · Score: 3 / 3</div>
+            <div class="grid grid-cols-3 border-t border-[var(--card-border)] pt-1">
+              <span>compiles (g++)</span><span class="text-[var(--success)] font-bold">PASS</span><span>1 / 1</span>
+              <span>prints hello</span><span class="text-[var(--success)] font-bold">PASS</span><span>2 / 2</span>
+            </div>
+          </div>
+          <div class="p-2 rounded bg-[var(--sidebar)] border border-[var(--card-border)]">
+            <div class="font-bold text-[var(--primary)]">Pull Request #1: Feedback (base: feedback &larr; head: main)</div>
+            <div class="text-[var(--muted-foreground)]">Click <b>Subscribe</b> for TA comments. Never close or merge this PR yourself!</div>
+          </div>
+        `
+      },
+      {
+        kicker: "Step 5 · Summary",
+        title: "4 Golden Rules for Classroom 50",
+        desc: "Follow these four rules on every assignment in Fundamentals of Computer Programming to ensure smooth autograding.",
+        actionLabel: "HelloWorld (C) Accept Link",
+        actionValue: "https://classroom50.org/MechatronicsDept/fall26-fop/assignments/helloworld/accept?k=fall26fop",
+        winHeader: "Golden Rules Checklist",
+        winStatus: "✓ Ready to Code",
+        render: () => `
+          <div class="space-y-1 p-2 rounded bg-[var(--sidebar)] border border-[var(--card-border)]">
+            <div><span class="text-[var(--success)] font-bold">1.</span> Never modify <b>.classroom50.yaml</b> or <b>.github/workflows/autograde.yaml</b>.</div>
+            <div><span class="text-[var(--success)] font-bold">2.</span> Only edit allowed files (<b>hello.cpp</b>); extra files are stripped at grade time.</div>
+            <div><span class="text-[var(--success)] font-bold">3.</span> Clone your personal <b>fall26-fop-hello-&lt;username&gt;</b> repo, never the <b>-template</b> repo.</div>
+            <div><span class="text-[var(--success)] font-bold">4.</span> Keep the <b>Feedback</b> Pull Request open; if setup breaks, click <b>Re-run setup</b> on the accept link.</div>
+          </div>
+        `
+      }
+    ];
+
+    let current = 0;
+    let playing = true;
+    let timer = null;
+
+    function renderTabs() {
+      const wrap = document.getElementById("tabs");
+      wrap.innerHTML = STEPS.map((_, idx) => `
+        <button onclick="goToStep(${idx})" class="px-2 py-0.5 rounded text-xs font-mono transition cursor-pointer ${
+          idx === current
+            ? "bg-[var(--primary)] text-[var(--primary-foreground)] font-bold"
+            : "bg-[var(--sidebar)] text-[var(--muted-foreground)] hover:text-[var(--foreground)]"
+        }">${idx + 1}</button>
+      `).join("");
+    }
+
+    function renderStep() {
+      const s = STEPS[current];
+      document.getElementById("stepBadge").textContent = `Step ${current + 1} / ${STEPS.length}`;
+      document.getElementById("stageKicker").textContent = s.kicker;
+      document.getElementById("stageTitle").textContent = s.title;
+      document.getElementById("stageDesc").textContent = s.desc;
+      document.getElementById("actionLabel").textContent = s.actionLabel;
+      document.getElementById("actionValue").textContent = s.actionValue;
+      document.getElementById("windowHeader").textContent = s.winHeader;
+      document.getElementById("windowStatus").textContent = s.winStatus;
+      document.getElementById("visualStage").innerHTML = s.render();
+      document.getElementById("progressBar").style.width = `${((current + 1) / STEPS.length) * 100}%`;
+      renderTabs();
+    }
+
+    function goToStep(idx) {
+      current = idx;
+      renderStep();
+      if (playing) restartTimer();
+    }
+
+    function togglePlay() {
+      playing = !playing;
+      document.getElementById("playBtn").textContent = playing ? "⏸ Pause Tour" : "▶ Play Tour";
+      if (playing) restartTimer();
+      else if (timer) clearInterval(timer);
+    }
+
+    function restartTimer() {
+      if (timer) clearInterval(timer);
+      timer = setInterval(() => {
+        current = (current + 1) % STEPS.length;
+        renderStep();
+      }, 4500);
+    }
+
+    function copyCurrent() {
+      const text = STEPS[current].actionValue;
+      navigator.clipboard.writeText(text);
+      const btn = document.getElementById("copyBtn");
+      btn.textContent = "Copied!";
+      setTimeout(() => { btn.textContent = "Copy"; }, 1200);
+    }
+
+    renderStep();
+    restartTimer();
+  </script>
+</body>
+</html>

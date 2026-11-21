@@ -41,7 +41,7 @@
 
     main {
       position: relative; z-index: 1;
-      width: min(760px, 100%);
+      width: min(880px, 100%);
       background: var(--glass);
       border: 1px solid var(--border);
       border-radius: 24px;
@@ -91,9 +91,9 @@
       -webkit-background-clip: text; background-clip: text; color: transparent;
     }
     .org { margin-top: 1.1rem; color: var(--accent); font-weight: 600; letter-spacing: .02em; }
-    .lead { color: var(--muted); font-size: 1.08rem; line-height: 1.65; max-width: 58ch; }
+    .lead { color: var(--muted); font-size: 1.08rem; line-height: 1.65; max-width: 64ch; }
 
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 2rem; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1rem; margin-top: 2rem; }
     .card {
       background: hsl(230 40% 100% / .04); border: 1px solid var(--border);
       border-radius: 16px; padding: 1.2rem 1.25rem;
@@ -103,6 +103,64 @@
     .card .icon { font-size: 1.5rem; }
     .card h2 { font-size: 1rem; margin: .55rem 0 .35rem; }
     .card p { color: var(--muted); font-size: .92rem; line-height: 1.55; }
+
+    .media-section {
+      margin-top: 2.25rem;
+      background: hsl(230 40% 100% / .03);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 1.35rem;
+    }
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+    .section-header h2 {
+      font-size: 1.15rem;
+      color: var(--text);
+    }
+    .btn-row {
+      display: flex;
+      gap: .6rem;
+      flex-wrap: wrap;
+    }
+    .btn-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      font-size: .82rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: none;
+      border: 1px solid hsl(190 90% 60% / .35);
+      background: hsl(190 90% 60% / .08);
+      padding: .4rem .8rem;
+      border-radius: 10px;
+      transition: background .2s, border-color .2s;
+    }
+    .btn-link:hover {
+      background: hsl(190 90% 60% / .18);
+      border-color: var(--accent);
+    }
+    video {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #0b0e1d;
+      display: block;
+    }
+    .walkthrough-frame {
+      width: 100%;
+      height: 360px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #0b0e1d;
+      display: block;
+    }
 
     .note {
       margin-top: 2rem; padding: 1rem 1.2rem; border-radius: 14px;
@@ -150,6 +208,29 @@
         <h2>3 · Push</h2>
         <p>Write your code and push. Every push is graded automatically with feedback in your repo.</p>
       </article>
+    </section>
+
+    <section class="media-section" aria-label="Student Onboarding Video">
+      <div class="section-header">
+        <h2>🎬 Student Onboarding Video Guide</h2>
+        <div class="btn-row">
+          <a class="btn-link" href="classroom50_student_guide.mp4" target="_blank" rel="noopener">Open Full Video (.mp4)</a>
+        </div>
+      </div>
+      <video controls preload="metadata">
+        <source src="classroom50_student_guide.mp4" type="video/mp4">
+        Your browser does not support the HTML5 video tag.
+      </video>
+    </section>
+
+    <section class="media-section" aria-label="Interactive Step-by-Step Walkthrough">
+      <div class="section-header">
+        <h2>🧭 Interactive Step-by-Step Walkthrough</h2>
+        <div class="btn-row">
+          <a class="btn-link" href="classroom50_walkthrough.html" target="_blank" rel="noopener">Open Fullscreen Walkthrough</a>
+        </div>
+      </div>
+      <iframe class="walkthrough-frame" src="classroom50_walkthrough.html" title="Classroom 50 Student Interactive Walkthrough"></iframe>
     </section>
 
     <div class="note">
