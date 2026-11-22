@@ -3,244 +3,882 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Ain Shams University Faculty of Engineering · Classroom</title>
-  <meta name="description" content="Welcome to the Ain Shams University Faculty of Engineering programming classroom. Assignments are shared by your instructor.">
+  <title>Department of Computer and Systems Engineering · Faculty of Engineering, Ain Shams University</title>
+  <meta name="description" content="Official programming and coursework portal for the Department of Computer and Systems Engineering (CSE), Faculty of Engineering, Ain Shams University (asu-cse).">
   <meta name="robots" content="noindex">
   <link rel="icon" href="ar_logo.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700&family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg1: hsl(230 45% 8%);
-      --bg2: hsl(255 40% 14%);
-      --accent: hsl(190 90% 60%);
-      --accent2: hsl(265 85% 70%);
-      --text: hsl(220 30% 94%);
-      --muted: hsl(220 15% 68%);
-      --glass: hsl(230 40% 100% / 0.06);
-      --border: hsl(230 40% 100% / 0.12);
+      --bg-base: hsl(212 44% 7%);
+      --bg-elevated: hsl(212 38% 11%);
+      --bg-surface: hsl(212 34% 14%);
+      --bg-surface-hover: hsl(212 34% 17%);
+      --bg-code: hsl(214 48% 6%);
+      --border-subtle: hsl(210 26% 20%);
+      --border-strong: hsl(204 32% 28%);
+      --text-primary: hsl(210 28% 96%);
+      --text-secondary: hsl(212 18% 72%);
+      --text-muted: hsl(212 14% 54%);
+      --brand-teal: hsl(197 76% 52%);
+      --brand-teal-soft: hsl(197 76% 52% / 0.12);
+      --brand-navy: hsl(202 82% 22%);
+      --brand-gold: hsl(42 68% 58%);
+      --brand-gold-soft: hsl(42 68% 58% / 0.14);
+      --status-green: hsl(156 68% 48%);
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+      --shadow-elevated: 0 24px 60px hsl(215 60% 3% / 0.55);
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       min-height: 100vh;
-      font-family: "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
-      color: var(--text);
-      background: radial-gradient(ellipse at 20% 10%, var(--bg2), transparent 60%),
-                  radial-gradient(ellipse at 85% 90%, hsl(190 60% 14%), transparent 55%),
-                  var(--bg1);
-      display: grid;
-      place-items: center;
-      padding: 2rem 1.25rem;
-      overflow-x: hidden;
+      font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+      color: var(--text-primary);
+      background-color: var(--bg-base);
+      background-image:
+        radial-gradient(ellipse 80% 50% at 15% 0%, hsl(202 72% 16% / 0.55), transparent 65%),
+        radial-gradient(ellipse 70% 45% at 88% 100%, hsl(42 55% 16% / 0.25), transparent 60%);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
-    .orb {
-      position: fixed; border-radius: 50%; filter: blur(80px); opacity: .35; z-index: 0;
-      animation: float 14s ease-in-out infinite alternate;
-    }
-    .orb.a { width: 340px; height: 340px; background: var(--accent2); top: -80px; left: -60px; }
-    .orb.b { width: 300px; height: 300px; background: var(--accent); bottom: -90px; right: -50px; animation-delay: -6s; }
-    @keyframes float { to { transform: translate(40px, 30px) scale(1.08); } }
 
-    main {
-      position: relative; z-index: 1;
-      width: min(880px, 100%);
-      background: var(--glass);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      backdrop-filter: blur(18px);
-      padding: clamp(1.75rem, 5vw, 3.25rem);
-      box-shadow: 0 30px 80px hsl(230 60% 3% / .55);
-      animation: rise .8s cubic-bezier(.2,.8,.2,1) both;
+    .page-shell {
+      width: min(1140px, 100%);
+      margin: 0 auto;
+      padding: clamp(1.25rem, 3vw, 2.5rem) clamp(1rem, 3vw, 2rem) 3.5rem;
     }
-    @keyframes rise { from { opacity: 0; transform: translateY(18px); } }
 
-    .top-bar {
+    /* Institutional Header */
+    .site-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 1rem;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      padding: 1.15rem 1.5rem;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-elevated);
+    }
+
+    .brand-identity {
+      display: flex;
+      align-items: center;
+      gap: 1.15rem;
       flex-wrap: wrap;
     }
-    .logo-wrap {
+
+    .logo-plate {
       display: inline-flex;
       align-items: center;
-      background: hsl(220 30% 96% / 0.92);
-      padding: .45rem .85rem;
-      border-radius: 14px;
-      border: 1px solid hsl(230 40% 100% / 0.25);
-      box-shadow: 0 8px 24px hsl(230 60% 3% / 0.25);
+      background: hsl(210 30% 97%);
+      padding: 0.45rem 0.9rem;
+      border-radius: var(--radius-md);
+      border: 1px solid hsl(210 20% 85%);
+      box-shadow: 0 6px 18px hsl(215 50% 4% / 0.3);
+      flex-shrink: 0;
     }
-    .logo {
-      height: clamp(44px, 7vw, 60px);
+
+    .logo-plate img {
+      height: clamp(46px, 6vw, 58px);
       width: auto;
       display: block;
       object-fit: contain;
     }
 
-    .badge {
-      display: inline-flex; align-items: center; gap: .5rem;
-      font-size: .8rem; letter-spacing: .08em; text-transform: uppercase;
-      color: var(--accent); border: 1px solid hsl(190 90% 60% / .35);
-      padding: .35rem .8rem; border-radius: 999px; background: hsl(190 90% 60% / .08);
+    .brand-titles {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
     }
-    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); animation: pulse 2s infinite; }
-    @keyframes pulse { 50% { box-shadow: 0 0 0 6px hsl(190 90% 60% / 0); } 0% { box-shadow: 0 0 0 0 hsl(190 90% 60% / .6); } }
+
+    .uni-kicker {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--brand-gold);
+    }
+
+    .dept-name-en {
+      font-size: clamp(1.02rem, 1.8vw, 1.2rem);
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.015em;
+    }
+
+    .dept-name-ar {
+      font-family: "Cairo", "Segoe UI", sans-serif;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      direction: rtl;
+      text-align: left;
+    }
+
+    .top-nav {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.5rem 0.9rem;
+      font-size: 0.84rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-decoration: none;
+      border-radius: var(--radius-sm);
+      border: 1px solid transparent;
+      transition: color 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--text-primary);
+      background: var(--bg-surface);
+      border-color: var(--border-subtle);
+    }
+
+    .nav-link.primary {
+      color: var(--text-primary);
+      background: var(--bg-surface);
+      border-color: var(--border-strong);
+      font-weight: 600;
+    }
+
+    .nav-link.primary:hover {
+      background: var(--bg-surface-hover);
+      border-color: var(--brand-teal);
+    }
+
+    /* Hero Section */
+    .hero-section {
+      margin-top: 1.75rem;
+      padding: clamp(1.85rem, 4vw, 3rem);
+      background: linear-gradient(165deg, var(--bg-elevated) 0%, hsl(212 42% 9%) 100%);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-elevated);
+      display: grid;
+      grid-template-columns: 1.35fr 0.95fr;
+      gap: 2.25rem;
+      align-items: start;
+    }
+
+    .hero-overline {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      flex-wrap: wrap;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--brand-teal);
+      margin-bottom: 0.85rem;
+    }
+
+    .hero-overline .sep {
+      color: var(--text-muted);
+    }
 
     h1 {
-      margin: 1.1rem 0 .6rem;
-      font-size: clamp(2rem, 5.5vw, 3rem); line-height: 1.1; font-weight: 750;
-      background: linear-gradient(100deg, var(--text) 30%, var(--accent) 70%, var(--accent2));
-      -webkit-background-clip: text; background-clip: text; color: transparent;
+      font-size: clamp(1.9rem, 3.8vw, 2.75rem);
+      line-height: 1.14;
+      font-weight: 700;
+      letter-spacing: -0.028em;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
     }
-    .org { margin-top: 1.1rem; color: var(--accent); font-weight: 600; letter-spacing: .02em; }
-    .lead { color: var(--muted); font-size: 1.08rem; line-height: 1.65; max-width: 64ch; }
 
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1rem; margin-top: 2rem; }
-    .card {
-      background: hsl(230 40% 100% / .04); border: 1px solid var(--border);
-      border-radius: 16px; padding: 1.2rem 1.25rem;
-      transition: transform .25s, border-color .25s, background .25s;
+    .hero-lead {
+      font-size: 1.04rem;
+      color: var(--text-secondary);
+      max-width: 64ch;
+      margin-bottom: 1.5rem;
     }
-    .card:hover { transform: translateY(-4px); border-color: hsl(190 90% 60% / .45); background: hsl(190 90% 60% / .06); }
-    .card .icon { font-size: 1.5rem; }
-    .card h2 { font-size: 1rem; margin: .55rem 0 .35rem; }
-    .card p { color: var(--muted); font-size: .92rem; line-height: 1.55; }
 
-    .media-section {
+    .hero-lead strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.68rem 1.15rem;
+      font-size: 0.88rem;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      transition: transform 0.15s ease, background 0.18s ease, border-color 0.18s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-solid {
+      background: var(--brand-teal);
+      color: hsl(214 50% 7%);
+      border: 1px solid var(--brand-teal);
+    }
+
+    .btn-solid:hover {
+      background: hsl(197 82% 58%);
+    }
+
+    .btn-outline {
+      background: var(--bg-surface);
+      color: var(--text-primary);
+      border: 1px solid var(--border-strong);
+    }
+
+    .btn-outline:hover {
+      background: var(--bg-surface-hover);
+      border-color: var(--brand-teal);
+    }
+
+    /* Institutional Fact Sheet Card */
+    .fact-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.35rem 1.45rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.95rem;
+    }
+
+    .fact-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .fact-card-title {
+      font-size: 0.84rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--brand-gold);
+    }
+
+    .org-tag {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--brand-teal);
+      background: var(--brand-teal-soft);
+      padding: 0.2rem 0.55rem;
+      border-radius: 6px;
+    }
+
+    .fact-list {
+      display: grid;
+      gap: 0.7rem;
+      list-style: none;
+    }
+
+    .fact-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.12rem;
+    }
+
+    .fact-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+
+    .fact-value {
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    .fact-value code {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.84rem;
+      color: var(--brand-teal);
+      background: var(--bg-code);
+      padding: 0.12rem 0.42rem;
+      border-radius: 5px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    /* Section Headers */
+    .section-block {
       margin-top: 2.25rem;
-      background: hsl(230 40% 100% / .03);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 1.35rem;
+      padding: clamp(1.5rem, 3.5vw, 2.25rem);
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-elevated);
     }
-    .section-header {
+
+    .section-top {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.4rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .section-kicker {
+      font-size: 0.76rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--brand-gold);
+      margin-bottom: 0.25rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.25rem, 2.2vw, 1.55rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+    }
+
+    .section-subtitle {
+      font-size: 0.94rem;
+      color: var(--text-secondary);
+      max-width: 68ch;
+      margin-top: 0.25rem;
+    }
+
+    /* CSE Academic Pillars Grid */
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+
+    .pillar-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.25rem 1.3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+    }
+
+    .pillar-card:hover {
+      border-color: var(--border-strong);
+      background: var(--bg-surface-hover);
+      transform: translateY(-2px);
+    }
+
+    .pillar-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    .pillar-code {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: var(--brand-teal);
+      background: var(--brand-teal-soft);
+      padding: 0.18rem 0.5rem;
+      border-radius: 5px;
+    }
+
+    .pillar-card h3 {
+      font-size: 1.02rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: -0.01em;
+    }
+
+    .pillar-card p {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    /* Classroom 50 Workflow Steps */
+    .workflow-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+
+    .workflow-step {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+
+    .step-number {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--brand-gold);
+      background: var(--brand-gold-soft);
+      width: fit-content;
+      padding: 0.18rem 0.55rem;
+      border-radius: 5px;
+    }
+
+    .workflow-step h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .workflow-step p {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    .workflow-step code {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.8rem;
+      color: var(--brand-teal);
+      background: var(--bg-code);
+      padding: 0.1rem 0.38rem;
+      border-radius: 4px;
+    }
+
+    /* Active Course Callout Bar */
+    .course-bar {
+      margin-top: 1.25rem;
+      padding: 1.15rem 1.35rem;
+      background: var(--bg-code);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 1rem;
       flex-wrap: wrap;
-      margin-bottom: 1rem;
     }
-    .section-header h2 {
-      font-size: 1.15rem;
-      color: var(--text);
-    }
-    .btn-row {
+
+    .course-bar-info {
       display: flex;
-      gap: .6rem;
-      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 0.2rem;
     }
-    .btn-link {
-      display: inline-flex;
-      align-items: center;
-      gap: .4rem;
-      font-size: .82rem;
+
+    .course-bar-label {
+      font-size: 0.75rem;
       font-weight: 600;
-      color: var(--accent);
-      text-decoration: none;
-      border: 1px solid hsl(190 90% 60% / .35);
-      background: hsl(190 90% 60% / .08);
-      padding: .4rem .8rem;
-      border-radius: 10px;
-      transition: background .2s, border-color .2s;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--status-green);
     }
-    .btn-link:hover {
-      background: hsl(190 90% 60% / .18);
-      border-color: var(--accent);
+
+    .course-bar-title {
+      font-size: 0.98rem;
+      font-weight: 600;
+      color: var(--text-primary);
     }
+
+    .course-bar-meta {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .course-bar-meta code {
+      font-family: "IBM Plex Mono", monospace;
+      color: var(--brand-teal);
+    }
+
+    /* Media Players */
     video {
       width: 100%;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: #0b0e1d;
-      display: block;
-    }
-    .walkthrough-frame {
-      width: 100%;
-      height: 360px;
-      border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
       background: #0b0e1d;
       display: block;
     }
 
-    .note {
-      margin-top: 2rem; padding: 1rem 1.2rem; border-radius: 14px;
-      border-left: 3px solid var(--accent2); background: hsl(265 85% 70% / .08);
-      color: var(--muted); font-size: .95rem; line-height: 1.6;
+    .walkthrough-frame {
+      width: 100%;
+      height: 410px;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      background: #0b0e1d;
+      display: block;
     }
-    .note strong { color: var(--text); }
-    footer { margin-top: 2rem; color: hsl(220 15% 50%); font-size: .82rem; text-align: center; }
-    @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+
+    .notice-banner {
+      margin-top: 2rem;
+      padding: 1.15rem 1.4rem;
+      border-radius: var(--radius-md);
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .notice-banner strong {
+      color: var(--text-primary);
+    }
+
+    /* Institutional Footer */
+    .site-footer {
+      margin-top: 2.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      font-size: 0.84rem;
+      color: var(--text-muted);
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 1.15rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--brand-teal);
+    }
+
+    @media (max-width: 980px) {
+      .hero-section {
+        grid-template-columns: 1fr;
+      }
+      .pillars-grid,
+      .workflow-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .walkthrough-frame {
+        height: 460px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .pillars-grid,
+      .workflow-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="orb a" aria-hidden="true"></div>
-  <div class="orb b" aria-hidden="true"></div>
-
-  <main>
-    <div class="top-bar">
-      <span class="badge"><span class="dot"></span>Fall 2026</span>
-      <div class="logo-wrap">
-        <img class="logo" src="ar_logo.png" alt="Ain Shams University Faculty of Engineering Logo">
-      </div>
-    </div>
-
-    <p class="org">Ain Shams University · Faculty of Engineering</p>
-    <h1>Welcome to the Programming Classroom</h1>
-    <p class="lead">
-      This is the home of programming coursework at the Faculty of Engineering,
-      including <strong>Fundamentals of Computer Programming</strong>.
-      Assignments, starter code, and automatic grading all run on GitHub.
-    </p>
-
-    <section class="grid" aria-label="How it works">
-      <article class="card">
-        <div class="icon">📨</div>
-        <h2>1 · Join</h2>
-        <p>Accept the GitHub organization invitation your instructor sends to your email.</p>
-      </article>
-      <article class="card">
-        <div class="icon">🧩</div>
-        <h2>2 · Accept</h2>
-        <p>Open the assignment link shared by your instructor to get your own private repository.</p>
-      </article>
-      <article class="card">
-        <div class="icon">🚀</div>
-        <h2>3 · Push</h2>
-        <p>Write your code and push. Every push is graded automatically with feedback in your repo.</p>
-      </article>
-    </section>
-
-    <section class="media-section" aria-label="Student Onboarding Video">
-      <div class="section-header">
-        <h2>🎬 Student Onboarding Video Guide</h2>
-        <div class="btn-row">
-          <a class="btn-link" href="classroom50_student_guide.mp4" target="_blank" rel="noopener">Open Full Video (.mp4)</a>
+  <div class="page-shell">
+    <header class="site-header" id="top-header">
+      <div class="brand-identity">
+        <div class="logo-plate">
+          <img src="ar_logo.png" alt="Ain Shams University · Faculty of Engineering Emblem">
+        </div>
+        <div class="brand-titles">
+          <span class="uni-kicker">Ain Shams University · Faculty of Engineering</span>
+          <span class="dept-name-en">Department of Computer and Systems Engineering</span>
+          <span class="dept-name-ar" lang="ar">قسم هندسة الحاسبات والنظم — كلية الهندسة جامعة عين شمس</span>
         </div>
       </div>
-      <video controls preload="metadata">
-        <source src="classroom50_student_guide.mp4" type="video/mp4">
-        <track kind="subtitles" src="classroom50_student_guide.vtt" srclang="en" label="English">
-        Your browser does not support the HTML5 video tag.
-      </video>
-    </section>
 
-    <section class="media-section" aria-label="Interactive Step-by-Step Walkthrough">
-      <div class="section-header">
-        <h2>🧭 Interactive Step-by-Step Walkthrough</h2>
-        <div class="btn-row">
-          <a class="btn-link" href="classroom50_walkthrough.html" target="_blank" rel="noopener">Open Fullscreen Walkthrough</a>
+      <nav class="top-nav" aria-label="Primary Navigation">
+        <a class="nav-link" id="nav-domains" href="#academic-domains">Academic Domains</a>
+        <a class="nav-link" id="nav-workflow" href="#classroom-workflow">Student Workflow</a>
+        <a class="nav-link" id="nav-video" href="#video-guide">Video Guide</a>
+        <a class="nav-link" id="nav-walkthrough" href="#interactive-walkthrough">Interactive Guide</a>
+        <a class="nav-link primary" id="nav-github-org" href="https://github.com/asu-cse" target="_blank" rel="noopener">github.com/asu-cse ↗</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero-section" aria-labelledby="hero-heading">
+        <div>
+          <div class="hero-overline">
+            <span>Computer &amp; Systems Engineering (CSE)</span>
+            <span class="sep">·</span>
+            <span>Abbassia Campus, Cairo</span>
+          </div>
+          <h1 id="hero-heading">Engineering Intelligent Software, Computing Hardware &amp; Autonomous Systems</h1>
+          <p class="hero-lead">
+            Welcome to the official GitHub coursework and programming portal for the
+            <strong>Department of Computer and Systems Engineering</strong> at the
+            <strong>Faculty of Engineering, Ain Shams University</strong>. All programming laboratories,
+            C/C++ starter templates, automated test suites, and code reviews run on GitHub via
+            <strong>Classroom 50</strong>.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-solid" id="hero-btn-video" href="#video-guide">Watch Student Onboarding Video</a>
+            <a class="btn btn-outline" id="hero-btn-walkthrough" href="#interactive-walkthrough">Explore Interactive Walkthrough</a>
+            <a class="btn btn-outline" id="hero-btn-classroom50" href="https://classroom50.org/" target="_blank" rel="noopener">Open Classroom 50 ↗</a>
+          </div>
+        </div>
+
+        <aside class="fact-card" aria-label="Department and Institution Details">
+          <div class="fact-card-header">
+            <span class="fact-card-title">Institutional Profile</span>
+            <span class="org-tag">asu-cse</span>
+          </div>
+          <ul class="fact-list">
+            <li class="fact-item">
+              <span class="fact-label">University &amp; Faculty</span>
+              <span class="fact-value">Ain Shams University · Faculty of Engineering</span>
+            </li>
+            <li class="fact-item">
+              <span class="fact-label">Department</span>
+              <span class="fact-value">Computer and Systems Engineering (CSE)</span>
+            </li>
+            <li class="fact-item">
+              <span class="fact-label">Location</span>
+              <span class="fact-value">1 El-Sarayat St., Abbassia, Cairo, Egypt</span>
+            </li>
+            <li class="fact-item">
+              <span class="fact-label">GitHub Organization</span>
+              <span class="fact-value"><a href="https://github.com/asu-cse" target="_blank" rel="noopener" style="color: var(--brand-teal); text-decoration: none;"><code>github.com/asu-cse</code></a></span>
+            </li>
+            <li class="fact-item">
+              <span class="fact-label">Active Undergraduate Classroom</span>
+              <span class="fact-value">Fundamentals of Computer Programming (<code>fall26-fop</code>)</span>
+            </li>
+          </ul>
+        </aside>
+      </section>
+
+      <section class="section-block" id="academic-domains" aria-labelledby="domains-heading">
+        <div class="section-top">
+          <div>
+            <div class="section-kicker">Department of Computer &amp; Systems Engineering</div>
+            <h2 class="section-title" id="domains-heading">Core Academic &amp; Laboratory Pillars</h2>
+            <p class="section-subtitle">
+              Our curriculum bridges foundational computer science, hardware architecture, and feedback control engineering through hands-on programming and laboratory coursework.
+            </p>
+          </div>
+        </div>
+
+        <div class="pillars-grid">
+          <article class="pillar-card">
+            <div class="pillar-head">
+              <span class="pillar-code">CSE · SOFTWARE</span>
+            </div>
+            <h3>Software &amp; Algorithms Engineering</h3>
+            <p>
+              Foundational programming in C and C++, data structures, algorithm design, operating systems, compilers, and large-scale software architecture.
+            </p>
+          </article>
+
+          <article class="pillar-card">
+            <div class="pillar-head">
+              <span class="pillar-code">CSE · ARCHITECTURE</span>
+            </div>
+            <h3>Computer Architecture &amp; Embedded Systems</h3>
+            <p>
+              Digital logic design, microprocessor organization, FPGA synthesis, real-time embedded systems, and high-performance computer networks.
+            </p>
+          </article>
+
+          <article class="pillar-card">
+            <div class="pillar-head">
+              <span class="pillar-code">CSE · SYSTEMS</span>
+            </div>
+            <h3>Control, Robotics &amp; Cyber-Physical Systems</h3>
+            <p>
+              Linear and nonlinear control theory, system identification, industrial automation, autonomous robotics, and real-time sensor integration.
+            </p>
+          </article>
+
+          <article class="pillar-card">
+            <div class="pillar-head">
+              <span class="pillar-code">CSE · INTELLIGENCE</span>
+            </div>
+            <h3>Artificial Intelligence &amp; Distributed Computing</h3>
+            <p>
+              Machine learning, computer vision, distributed and cloud infrastructure, database engineering, and cybersecurity fundamentals.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-block" id="classroom-workflow" aria-labelledby="workflow-heading">
+        <div class="section-top">
+          <div>
+            <div class="section-kicker">Classroom 50 · GitHub Workflow</div>
+            <h2 class="section-title" id="workflow-heading">How Programming Assignments Work</h2>
+            <p class="section-subtitle">
+              Every student receives a private GitHub repository inside <strong>asu-cse</strong> with starter code, automated GitHub Actions grading, and an open Feedback Pull Request.
+            </p>
+          </div>
+        </div>
+
+        <div class="workflow-grid">
+          <article class="workflow-step">
+            <span class="step-number">STEP 01 · JOIN ORG</span>
+            <h3>Accept Your Organization Invite</h3>
+            <p>
+              Accept the invitation sent by your instructor via email, at <code>github.com/asu-cse</code>, or on <code>classroom50.org</code> to join the student team.
+            </p>
+          </article>
+
+          <article class="workflow-step">
+            <span class="step-number">STEP 02 · ACCEPT</span>
+            <h3>Generate Your Personal Repository</h3>
+            <p>
+              Open the assignment acceptance link shared by your instructor (or run <code>gh student accept</code>) to provision your private repository.
+            </p>
+          </article>
+
+          <article class="workflow-step">
+            <span class="step-number">STEP 03 · CODE &amp; PUSH</span>
+            <h3>Edit Allowed Files &amp; Push to Main</h3>
+            <p>
+              Clone your personal repo, implement your solution in the allowed source files (such as <code>hello.cpp</code>), test with <code>g++</code>, and <code>git push</code>.
+            </p>
+          </article>
+
+          <article class="workflow-step">
+            <span class="step-number">STEP 04 · REVIEW</span>
+            <h3>Check Release Scores &amp; Feedback PR</h3>
+            <p>
+              View your automated test breakdown on GitHub <strong>Releases</strong> and read line-by-line TA and instructor review comments in <strong>Pull Request #1</strong>.
+            </p>
+          </article>
+        </div>
+
+        <div class="course-bar">
+          <div class="course-bar-info">
+            <span class="course-bar-label">Active Fall 2026 Course Classroom</span>
+            <span class="course-bar-title">Fundamentals of Computer Programming</span>
+            <span class="course-bar-meta">
+              Organization: <code>asu-cse</code> &nbsp;·&nbsp; Classroom Slug: <code>fall26-fop</code> &nbsp;·&nbsp; Student Team: <code>classroom50-fall26-fop</code>
+            </span>
+          </div>
+          <div class="hero-actions">
+            <a class="btn btn-outline" id="btn-course-assignments" href="https://classroom50.org/asu-cse/fall26-fop/assignments" target="_blank" rel="noopener">Open Classroom Dashboard ↗</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-block" id="video-guide" aria-labelledby="video-heading">
+        <div class="section-top">
+          <div>
+            <div class="section-kicker">Narrated Tutorial · 1080p HD with Subtitles</div>
+            <h2 class="section-title" id="video-heading">Student Onboarding Video Guide</h2>
+            <p class="section-subtitle">
+              Step-by-step visual walkthrough covering organization enrollment, repository setup, local C++ compilation, Release scores, Feedback PRs, and the 4 Golden Rules.
+            </p>
+          </div>
+          <div class="hero-actions">
+            <a class="btn btn-outline" id="btn-open-video" href="classroom50_student_guide.mp4" target="_blank" rel="noopener">Open Full Video (.mp4) ↗</a>
+          </div>
+        </div>
+
+        <video id="onboarding-video-player" controls preload="metadata">
+          <source src="classroom50_student_guide.mp4" type="video/mp4">
+          <track kind="subtitles" src="classroom50_student_guide.vtt" srclang="en" label="English" default>
+          Your browser does not support the HTML5 video tag.
+        </video>
+      </section>
+
+      <section class="section-block" id="interactive-walkthrough" aria-labelledby="walkthrough-heading">
+        <div class="section-top">
+          <div>
+            <div class="section-kicker">Interactive Reference · Step-by-Step Tour</div>
+            <h2 class="section-title" id="walkthrough-heading">Interactive Classroom 50 Walkthrough</h2>
+            <p class="section-subtitle">
+              Click through each stage of the workflow or copy official links and CLI commands directly to your clipboard.
+            </p>
+          </div>
+          <div class="hero-actions">
+            <a class="btn btn-outline" id="btn-open-walkthrough" href="classroom50_walkthrough.html" target="_blank" rel="noopener">Open Fullscreen Walkthrough ↗</a>
+          </div>
+        </div>
+
+        <iframe
+          id="walkthrough-iframe"
+          class="walkthrough-frame"
+          src="classroom50_walkthrough.html"
+          title="Department of Computer and Systems Engineering — Classroom 50 Student Interactive Walkthrough">
+        </iframe>
+      </section>
+
+      <div class="notice-banner" role="note">
+        <div>
+          <strong>Looking for an assignment acceptance link?</strong>
+          Assignment links carry your classroom's capability key and are shared directly by your instructor and teaching assistants. If you have not yet received your invitation to <strong>asu-cse</strong>, please contact your course staff.
         </div>
       </div>
-      <iframe class="walkthrough-frame" src="classroom50_walkthrough.html" title="Classroom 50 Student Interactive Walkthrough"></iframe>
-    </section>
+    </main>
 
-    <div class="note">
-      <strong>Looking for an assignment?</strong> This page is for information only.
-      Assignment links are shared directly by your instructor. If you haven't received one,
-      please contact your course staff.
-    </div>
-
-    <footer>Ain Shams University · Faculty of Engineering · Fundamentals of Computer Programming</footer>
-  </main>
+    <footer class="site-footer">
+      <div>
+        Department of Computer and Systems Engineering · Faculty of Engineering · Ain Shams University (Cairo, Egypt)
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/asu-cse" target="_blank" rel="noopener">GitHub Organization (asu-cse)</a>
+        <a href="https://classroom50.org/" target="_blank" rel="noopener">Classroom 50</a>
+        <a href="classroom50_student_guide.mp4" target="_blank" rel="noopener">Video Guide</a>
+        <a href="classroom50_walkthrough.html" target="_blank" rel="noopener">Interactive Walkthrough</a>
+      </div>
+    </footer>
+  </div>
 </body>
 </html>
