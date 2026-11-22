@@ -181,7 +181,7 @@
       display: grid;
       grid-template-columns: 1.35fr 0.95fr;
       gap: 2.25rem;
-      align-items: start;
+      align-items: center;
     }
 
     .hero-overline {
@@ -199,15 +199,6 @@
 
     .hero-overline .sep {
       color: var(--text-muted);
-    }
-
-    h1 {
-      font-size: clamp(1.9rem, 3.8vw, 2.75rem);
-      line-height: 1.14;
-      font-weight: 700;
-      letter-spacing: -0.028em;
-      color: var(--text-primary);
-      margin-bottom: 1rem;
     }
 
     .hero-lead {
@@ -637,13 +628,12 @@
         </div>
         <div class="brand-titles">
           <span class="uni-kicker">Ain Shams University · Faculty of Engineering</span>
-          <span class="dept-name-en">Department of Computer and Systems Engineering</span>
+          <h1 class="dept-name-en">Department of Computer and Systems Engineering</h1>
           <span class="dept-name-ar" lang="ar">قسم هندسة الحاسبات والنظم — كلية الهندسة جامعة عين شمس</span>
         </div>
       </div>
 
       <nav class="top-nav" aria-label="Primary Navigation">
-        <a class="nav-link" id="nav-domains" href="#academic-domains">Academic Domains</a>
         <a class="nav-link" id="nav-workflow" href="#classroom-workflow">Student Workflow</a>
         <a class="nav-link" id="nav-video" href="#video-guide">Video Guide</a>
         <a class="nav-link" id="nav-walkthrough" href="#interactive-walkthrough">Interactive Guide</a>
@@ -652,14 +642,13 @@
     </header>
 
     <main>
-      <section class="hero-section" aria-labelledby="hero-heading">
+      <section class="hero-section" aria-label="Coursework Portal Overview">
         <div>
           <div class="hero-overline">
             <span>Computer &amp; Systems Engineering (CSE)</span>
             <span class="sep">·</span>
             <span>Abbassia Campus, Cairo</span>
           </div>
-          <h1 id="hero-heading">Engineering Intelligent Software, Computing Hardware &amp; Autonomous Systems</h1>
           <p class="hero-lead">
             Welcome to the official GitHub coursework and programming portal for the
             <strong>Department of Computer and Systems Engineering</strong> at the
@@ -702,60 +691,6 @@
             </li>
           </ul>
         </aside>
-      </section>
-
-      <section class="section-block" id="academic-domains" aria-labelledby="domains-heading">
-        <div class="section-top">
-          <div>
-            <div class="section-kicker">Department of Computer &amp; Systems Engineering</div>
-            <h2 class="section-title" id="domains-heading">Core Academic &amp; Laboratory Pillars</h2>
-            <p class="section-subtitle">
-              Our curriculum bridges foundational computer science, hardware architecture, and feedback control engineering through hands-on programming and laboratory coursework.
-            </p>
-          </div>
-        </div>
-
-        <div class="pillars-grid">
-          <article class="pillar-card">
-            <div class="pillar-head">
-              <span class="pillar-code">CSE · SOFTWARE</span>
-            </div>
-            <h3>Software &amp; Algorithms Engineering</h3>
-            <p>
-              Foundational programming in C and C++, data structures, algorithm design, operating systems, compilers, and large-scale software architecture.
-            </p>
-          </article>
-
-          <article class="pillar-card">
-            <div class="pillar-head">
-              <span class="pillar-code">CSE · ARCHITECTURE</span>
-            </div>
-            <h3>Computer Architecture &amp; Embedded Systems</h3>
-            <p>
-              Digital logic design, microprocessor organization, FPGA synthesis, real-time embedded systems, and high-performance computer networks.
-            </p>
-          </article>
-
-          <article class="pillar-card">
-            <div class="pillar-head">
-              <span class="pillar-code">CSE · SYSTEMS</span>
-            </div>
-            <h3>Control, Robotics &amp; Cyber-Physical Systems</h3>
-            <p>
-              Linear and nonlinear control theory, system identification, industrial automation, autonomous robotics, and real-time sensor integration.
-            </p>
-          </article>
-
-          <article class="pillar-card">
-            <div class="pillar-head">
-              <span class="pillar-code">CSE · INTELLIGENCE</span>
-            </div>
-            <h3>Artificial Intelligence &amp; Distributed Computing</h3>
-            <p>
-              Machine learning, computer vision, distributed and cloud infrastructure, database engineering, and cybersecurity fundamentals.
-            </p>
-          </article>
-        </div>
       </section>
 
       <section class="section-block" id="classroom-workflow" aria-labelledby="workflow-heading">
