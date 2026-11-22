@@ -9,41 +9,41 @@ Welcome to Fundamentals of Computer Programming at Ain Shams University, Faculty
 In this course, all assignments, C++ starter code, and automated grading run on GitHub through Classroom 50.
 
 3
-00:00:14.200 --> 00:00:22.400
-Step 1: Before opening any assignment link, accept your invitation to join the MechatronicsDept GitHub Organization.
+00:00:14.200 --> 00:00:23.333
+Step 1: Before opening any assignment link, accept your invitation to join the ASU Computer and Systems Engineering GitHub Organization.
 
 4
-00:00:22.400 --> 00:00:30.533
-Check your email or visit github.com/MechatronicsDept and click Accept Invitation to join the classroom student team.
+00:00:23.333 --> 00:00:33.333
+Check your email or visit github.com/ASU-Computer-and-Systems-Engineering and click Accept Invitation to join the student team.
 
 5
-00:00:30.533 --> 00:00:38.533
+00:00:33.333 --> 00:00:41.333
 Step 2: Open the assignment acceptance link shared by your instructor on classroom50.org and click Accept assignment.
 
 6
-00:00:38.533 --> 00:00:45.800
+00:00:41.333 --> 00:00:48.600
 Classroom 50 automatically creates your private repository with starter code and opens your Feedback Pull Request.
 
 7
-00:00:45.800 --> 00:00:55.333
+00:00:48.600 --> 00:00:58.133
 Step 3: Clone your personal repository, edit hello.cpp to print Hello, world!, and test it locally with g++.
 
 8
-00:00:55.333 --> 00:01:03.333
+00:00:58.133 --> 00:01:06.133
 Commit and push your code to submit. Never edit or delete .classroom50.yaml or the autograde workflow file.
 
 9
-00:01:03.333 --> 00:01:11.933
+00:01:06.133 --> 00:01:14.733
 Step 4: Every push is graded automatically. Open GitHub Releases in your repository to view your test score out of 3.
 
 10
-00:01:11.933 --> 00:01:19.733
+00:01:14.733 --> 00:01:22.533
 Check Pull Request #1 ('Feedback') for inline comments from your instructor and TAs. Never close or merge it.
 
 11
-00:01:19.733 --> 00:01:27.867
+00:01:22.533 --> 00:01:30.667
 Remember the four Golden Rules: never touch system files, only edit allowed files, and always clone your personal repo.
 
 12
-00:01:27.867 --> 00:01:35.000
-Use the official MechatronicsDept links on screen to get started. Best of luck with your programming coursework!
+00:01:30.667 --> 00:01:39.067
+Use the official ASU Computer and Systems Engineering links on screen to get started. Best of luck with your programming coursework!
