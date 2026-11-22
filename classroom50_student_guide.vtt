@@ -9,41 +9,41 @@ Welcome to Fundamentals of Computer Programming at Ain Shams University, Faculty
 In this course, all assignments, C++ starter code, and automated grading run on GitHub through Classroom 50.
 
 3
-00:00:14.200 --> 00:00:23.333
-Step 1: Before opening any assignment link, accept your invitation to join the ASU Computer and Systems Engineering GitHub Organization.
+00:00:14.200 --> 00:00:22.267
+Step 1: Before opening any assignment link, accept your invitation to join the asu-cse GitHub Organization.
 
 4
-00:00:23.333 --> 00:00:33.333
-Check your email or visit github.com/ASU-Computer-and-Systems-Engineering and click Accept Invitation to join the student team.
+00:00:22.267 --> 00:00:30.400
+Check your email or visit github.com/asu-cse and click Accept Invitation to join the classroom student team.
 
 5
-00:00:33.333 --> 00:00:41.333
+00:00:30.400 --> 00:00:38.400
 Step 2: Open the assignment acceptance link shared by your instructor on classroom50.org and click Accept assignment.
 
 6
-00:00:41.333 --> 00:00:48.600
+00:00:38.400 --> 00:00:45.667
 Classroom 50 automatically creates your private repository with starter code and opens your Feedback Pull Request.
 
 7
-00:00:48.600 --> 00:00:58.133
+00:00:45.667 --> 00:00:55.200
 Step 3: Clone your personal repository, edit hello.cpp to print Hello, world!, and test it locally with g++.
 
 8
-00:00:58.133 --> 00:01:06.133
+00:00:55.200 --> 00:01:03.200
 Commit and push your code to submit. Never edit or delete .classroom50.yaml or the autograde workflow file.
 
 9
-00:01:06.133 --> 00:01:14.733
+00:01:03.200 --> 00:01:11.800
 Step 4: Every push is graded automatically. Open GitHub Releases in your repository to view your test score out of 3.
 
 10
-00:01:14.733 --> 00:01:22.533
+00:01:11.800 --> 00:01:19.600
 Check Pull Request #1 ('Feedback') for inline comments from your instructor and TAs. Never close or merge it.
 
 11
-00:01:22.533 --> 00:01:30.667
+00:01:19.600 --> 00:01:27.733
 Remember the four Golden Rules: never touch system files, only edit allowed files, and always clone your personal repo.
 
 12
-00:01:30.667 --> 00:01:39.067
-Use the official ASU Computer and Systems Engineering links on screen to get started. Best of luck with your programming coursework!
+00:01:27.733 --> 00:01:35.067
+Use the official asu-cse links on screen to get started. Best of luck with your programming coursework!
