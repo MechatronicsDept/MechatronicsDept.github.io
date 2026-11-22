@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Ain Shams University · Classroom 50 Interactive Student Walkthrough</title>
+  <title>Ain Shams University (asu-cse) · Classroom 50 Interactive Student Walkthrough</title>
   <link rel="icon" href="ar_logo.png" type="image/png" />
   <style>
     :root {
@@ -298,16 +298,16 @@
   <script>
     const STEPS = [
       {
-        kicker: "Overview · Ain Shams Engineering",
+        kicker: "Overview · Ain Shams Engineering (asu-cse)",
         title: "Welcome to Fundamentals of Computer Programming",
-        desc: "Our course uses Classroom 50 (classroom50.org) on GitHub. Your starter code, automated C++ tests, scores, and TA feedback all live inside your GitHub repository.",
-        actionLabel: "Course Landing Page",
+        desc: "Our course runs on GitHub through Classroom 50 (classroom50.org). Your starter code, automated C++ tests, Release scores, and Feedback PR all live in your personal GitHub repository.",
+        actionLabel: "Course Welcome Portal",
         actionValue: "https://asu-cse.github.io/",
         winHeader: "asu-cse.github.io",
         winStatus: "● Fall 2026 Live",
         render: () => `
           <div class="sub-box">
-            <div><b>Ain Shams University · Faculty of Engineering</b></div>
+            <div><b>Ain Shams University · Faculty of Engineering (asu-cse)</b></div>
             <div class="c-muted">Classroom: <span class="c-cyan">fall26-fop</span> (Fundamentals of Computer Programming)</div>
           </div>
           <div class="mini-grid">
@@ -318,38 +318,38 @@
         `
       },
       {
-        kicker: "Step 1 · Required First Step",
-        title: "Accept the GitHub Organization Invitation",
-        desc: "Check your email or open github.com/asu-cse and accept the invitation. This enrolls you in the classroom50-fall26-fop student team.",
+        kicker: "Step 1 · Join Your Classroom",
+        title: "Accept the asu-cse Organization Invitation",
+        desc: "Accept via your email link, at github.com/asu-cse, by clicking 'Accept and open' under pending invitations on classroom50.org, or by opening an assignment link (which accepts your pending invite automatically).",
         actionLabel: "GitHub Organization URL",
         actionValue: "https://github.com/asu-cse",
-        winHeader: "github.com/asu-cse",
+        winHeader: "github.com/asu-cse & classroom50.org",
         winStatus: "✓ Team: classroom50-fall26-fop",
         render: () => `
           <div class="sub-box">
-            <div><b>📨 You've been invited to join asu-cse</b></div>
-            <div class="c-muted">Invited by course staff · Adds you to team <span class="c-cyan">classroom50-fall26-fop</span></div>
-            <div class="pill-ok">✓ Accept Invitation</div>
+            <div><b>📨 Pending Invitation to join asu-cse</b></div>
+            <div class="c-muted">Enrolls you in team <span class="c-cyan">classroom50-fall26-fop</span></div>
+            <div class="pill-ok">✓ Accept Invitation / Accept and open</div>
           </div>
           <div class="warn-box">
-            ⚠ If skipped, assignment links say: "This assignment isn't available to you."
+            ⚠ If not invited yet, the accept page says <b>"Not a member yet"</b> (or <b>"This assignment isn't available to you"</b>). Ask your instructor to add you to the roster!
           </div>
         `
       },
       {
         kicker: "Step 2 · Get Your Repository",
         title: "Accept the 'Hello, World!' Assignment",
-        desc: "Open the assignment link on classroom50.org and click 'Accept assignment'. It clones fall26-fop-hello-template into your personal private repository.",
+        desc: "Open the assignment link shared by your instructor and click 'Accept assignment', then 'Open repository'. Having trouble later? Expand 'Having trouble?' on the accept page and click 'Re-run setup'.",
         actionLabel: "Assignment 1 ('hello') Accept Link",
         actionValue: "https://classroom50.org/asu-cse/fall26-fop/assignments/hello/accept?k=fall26fop",
         winHeader: "classroom50.org · Accept Assignment",
         winStatus: "✓ Repo Created",
         render: () => `
           <div class="sub-box">
-            <div class="c-green">✓ Created private repo: <b>asu-cse/fall26-fop-hello-student</b></div>
-            <div class="c-green">✓ Copied starter code: <b>README.md</b>, <b>hello.cpp</b></div>
+            <div class="c-green">✓ Created private repo: <b>asu-cse/fall26-fop-hello-&lt;username&gt;</b></div>
+            <div class="c-green">✓ Copied starter code from <b>fall26-fop-hello-template</b> (README.md, hello.cpp)</div>
             <div class="c-green">✓ Committed <b>.classroom50.yaml</b> &amp; <b>.github/workflows/autograde.yaml</b></div>
-            <div class="c-green">✓ Opened <b>Feedback Pull Request #1</b> (main &rarr; feedback)</div>
+            <div class="c-green">✓ Frozen <b>feedback</b> branch &amp; opened <b>Feedback Pull Request #1</b></div>
           </div>
           <div class="c-muted">
             CLI option: <span class="c-cyan">gh student accept asu-cse fall26-fop hello --key fall26fop</span>
@@ -358,10 +358,10 @@
       },
       {
         kicker: "Step 3 · Code, Compile & Submit",
-        title: "Edit hello.cpp, Test with g++, and Push",
-        desc: "Clone your personal repo, make hello.cpp print 'Hello, world!', test locally, then commit and push (or run 'gh student submit').",
+        title: "Edit hello.cpp, Test Locally with g++, and Push",
+        desc: "Clone your personal repo, edit hello.cpp to print 'Hello, world!', test with g++, then git push (or run 'gh student submit', which also syncs .gitignore and non-shim .github/ files from the template).",
         actionLabel: "Terminal Commands",
-        actionValue: "g++ -o hello hello.cpp && ./hello && git add hello.cpp && git commit -m \"Solve hello\" && git push",
+        actionValue: "g++ -o hello hello.cpp && ./hello && git add hello.cpp && git commit -m \"Implement Hello, world!\" && git push",
         winHeader: "bash — fall26-fop-hello-student",
         winStatus: "● Pushed to main",
         render: () => `
@@ -369,8 +369,8 @@
             <div class="c-cyan">$ g++ -o hello hello.cpp &amp;&amp; ./hello</div>
             <div class="c-green">Hello, world!</div>
             <div class="c-cyan">$ git add hello.cpp &amp;&amp; git commit -m "Implement Hello, world!"</div>
-            <div class="c-cyan">$ git push</div>
-            <div class="c-muted">main -&gt; main (Triggered Classroom50 Autograde Runner)</div>
+            <div class="c-cyan">$ git push &nbsp;&nbsp;<span class="c-muted"># or: gh student submit</span></div>
+            <div class="c-muted">main -&gt; main (Tags submit/&lt;UTC-timestamp&gt;-&lt;sha&gt; &amp; grades)</div>
           </div>
           <div class="err-box">
             ✗ Do NOT edit/delete <b>.classroom50.yaml</b> or <b>.github/workflows/autograde.yaml</b>!
@@ -378,38 +378,38 @@
         `
       },
       {
-        kicker: "Step 4 · Autograding & Code Review",
+        kicker: "Step 4 · View Your Submissions & Feedback",
         title: "Check Your Score in Releases & Feedback PR",
-        desc: "Every push creates a 'submit/*' GitHub Release with your test breakdown and updates Pull Request #1 ('Feedback') for inline teacher/TA comments.",
-        actionLabel: "Classroom Dashboard",
+        desc: "Scores live on your repo's GitHub Releases. On classroom50.org, open 'My submission' and click 'View autograder details' or 'View score' to open the Release. Check Pull Request #1 ('Feedback') for inline TA comments.",
+        actionLabel: "Classroom Assignments Page",
         actionValue: "https://classroom50.org/asu-cse/fall26-fop/assignments",
         winHeader: "GitHub Releases & Pull Request #1",
         winStatus: "★ Score: 3 / 3",
         render: () => `
           <div class="sub-box">
-            <div class="c-green"><b>Release: Submission submit/2026-11-20T... · Score: 3 / 3</b></div>
+            <div class="c-green"><b>Release: Submission submit/2026-11-22T... · Score: 3 / 3</b></div>
             <div class="c-muted" style="margin-top:4px;">compiles (g++): <b class="c-green">PASS (1/1)</b> &nbsp;|&nbsp; prints hello: <b class="c-green">PASS (2/2)</b></div>
           </div>
           <div class="sub-box">
             <div class="c-cyan"><b>Pull Request #1: Feedback (base: feedback &larr; head: main)</b></div>
-            <div class="c-muted">Click <b>Subscribe</b> for TA comments. Never close or merge this PR yourself!</div>
+            <div class="c-muted">Click <b>Subscribe</b> for inline TA comments. Never close or merge this PR yourself!</div>
           </div>
         `
       },
       {
-        kicker: "Step 5 · Summary",
+        kicker: "Step 5 · Summary & Golden Rules",
         title: "4 Golden Rules for Classroom 50",
-        desc: "Follow these four rules on every assignment in Fundamentals of Computer Programming to ensure smooth autograding.",
+        desc: "Follow these four rules on every assignment in Fundamentals of Computer Programming to keep autograding and code review working smoothly.",
         actionLabel: "HelloWorld (C) Accept Link",
         actionValue: "https://classroom50.org/asu-cse/fall26-fop/assignments/helloworld/accept?k=fall26fop",
         winHeader: "Golden Rules Checklist",
         winStatus: "✓ Ready to Code",
         render: () => `
           <div class="sub-box">
-            <div><b class="c-green">1.</b> Never modify <b>.classroom50.yaml</b> or <b>.github/workflows/autograde.yaml</b>.</div>
-            <div><b class="c-green">2.</b> Only edit allowed files (<b>hello.cpp</b>); extra files are stripped at grade time.</div>
-            <div><b class="c-green">3.</b> Clone your personal <b>fall26-fop-hello-&lt;username&gt;</b> repo, never the <b>-template</b> repo.</div>
-            <div><b class="c-green">4.</b> Keep the <b>Feedback</b> Pull Request open; if setup breaks, click <b>Re-run setup</b> on the accept link.</div>
+            <div><b class="c-green">1.</b> Never modify <b>.classroom50.yaml</b> or <b>.github/workflows/autograde.yaml</b> (if broken: open accept link &rarr; <b>Having trouble?</b> &rarr; <b>Re-run setup</b>).</div>
+            <div><b class="c-green">2.</b> Only edit allowed files (<b>hello.cpp</b>); extra unallowed files are removed before grading.</div>
+            <div><b class="c-green">3.</b> Clone your personal <b>asu-cse/fall26-fop-hello-&lt;username&gt;</b> repo, never the <b>-template</b> repo.</div>
+            <div><b class="c-green">4.</b> Keep the <b>Feedback</b> Pull Request open all semester; only teachers/TAs merge it when grading is complete.</div>
           </div>
         `
       }

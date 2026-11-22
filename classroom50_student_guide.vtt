@@ -41,9 +41,13 @@ Step 4: Every push is graded automatically. Open GitHub Releases in your reposit
 Check Pull Request #1 ('Feedback') for inline comments from your instructor and TAs. Never close or merge it.
 
 11
-00:01:18.733 --> 00:01:26.867
-Remember the four Golden Rules: never touch system files, only edit allowed files, and always clone your personal repo.
+00:01:18.733 --> 00:01:30.667
+Golden Rules 1 & 2: Never modify .classroom50.yaml or autograde.yaml, and only edit allowed files like hello.cpp.
 
 12
-00:01:26.867 --> 00:01:34.133
-Use the official asu-cse links on screen to get started. Best of luck with your programming coursework!
+00:01:30.667 --> 00:01:42.800
+Golden Rules 3 & 4: Always clone your personal asu-cse repo (never the template), and keep your Feedback PR open.
+
+13
+00:01:42.800 --> 00:01:52.733
+Use our official asu-cse links on screen to get started. Best of luck with your coursework at Ain Shams University!
